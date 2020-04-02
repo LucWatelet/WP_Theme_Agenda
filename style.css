@@ -1,0 +1,17 @@
+/*
+Theme Name: agenda
+Theme URI:
+Author URI: http://www.graphisteriegenerale.lu
+Author: Graphisterie Generale
+Description:
+Version: 0.1
+License:
+License URI:
+Tags:
+*/
+
+/*@import url('editor-style.css');*/
+
+ul.hades_picto li img {
+	height: 32px;
+}

@@ -1,0 +1,12 @@
+ul.hades_picto li img {
+	height: 32px;
+}
+
+ul.hades_picto {
+	list-style: none;
+}
+
+ul.hades_picto li {
+	display: inline;
+	padding: 0 6px;
+}

@@ -1,0 +1,15 @@
+0000000000000000000000000000000000000000 1ec60f552c9bee264a95288fe6494fe9dfea8d86 l.watelet <l.watelet@courriel.province.luxembourg.be> 1584607738 +0100	commit (initial): initial commit
+1ec60f552c9bee264a95288fe6494fe9dfea8d86 47a171b303723f53dfab9da5abed762e179122ab l.watelet <l.watelet@courriel.province.luxembourg.be> 1584609130 +0100	commit: relocalisation des fichiers
+47a171b303723f53dfab9da5abed762e179122ab f4f8b1af2ccfdc17f729c1b7976ea697c9688cdd l.watelet <l.watelet@courriel.province.luxembourg.be> 1585039500 +0100	commit: adaptation repertoires
+f4f8b1af2ccfdc17f729c1b7976ea697c9688cdd 3bd041cb652f61e459dd88c74dd7856ead8a3fda l.watelet <l.watelet@courriel.province.luxembourg.be> 1585057255 +0100	commit: contact_html
+3bd041cb652f61e459dd88c74dd7856ead8a3fda 5154af289b67672fdfa48055855fcf8898e6b24f l.watelet <l.watelet@courriel.province.luxembourg.be> 1585058991 +0100	commit: contact_html avec adresse
+5154af289b67672fdfa48055855fcf8898e6b24f 4a52dd48b75505c611c2e22f44a58029a65b2910 l.watelet <l.watelet@courriel.province.luxembourg.be> 1585059379 +0100	commit: contact html with name
+4a52dd48b75505c611c2e22f44a58029a65b2910 1a506fe927ed4a1541abe8eaeb7d408475ec5015 l.watelet <l.watelet@courriel.province.luxembourg.be> 1585068666 +0100	commit: contact_html cloture
+1a506fe927ed4a1541abe8eaeb7d408475ec5015 002ccadd80efadb8d53059e60744fa46bc6cd82e l.watelet <l.watelet@courriel.province.luxembourg.be> 1585128143 +0100	commit: mise en forme
+002ccadd80efadb8d53059e60744fa46bc6cd82e 16496f47e54e150f937913dea9f9d78b332a5c4a l.watelet <l.watelet@courriel.province.luxembourg.be> 1585137167 +0100	commit: create function get_html_description()
+16496f47e54e150f937913dea9f9d78b332a5c4a 92c07c34b869df305d82d05b5dac9f573902d886 l.watelet <l.watelet@courriel.province.luxembourg.be> 1585215231 +0100	commit: html label, description et information
+92c07c34b869df305d82d05b5dac9f573902d886 9f36881d240eef57d5e4df149eaf24ae0204789a l.watelet <l.watelet@courriel.province.luxembourg.be> 1585240555 +0100	commit: function get_html_label et quelques labels de test
+9f36881d240eef57d5e4df149eaf24ae0204789a 9f36881d240eef57d5e4df149eaf24ae0204789a l.watelet <l.watelet@courriel.province.luxembourg.be> 1585240575 +0100	checkout: moving from master to master
+9f36881d240eef57d5e4df149eaf24ae0204789a bbd77a7db6e8578694cf665de6642ecfb2dee319 l.watelet <l.watelet@courriel.province.luxembourg.be> 1585240631 +0100	commit: creation de la function get_html_label et de quelques svg de test
+bbd77a7db6e8578694cf665de6642ecfb2dee319 25be27862840e321fce2e5b10f600fc16bfc3f82 l.watelet <l.watelet@courriel.province.luxembourg.be> 1585245168 +0100	commit: Creation de la fonction format_attribute et utilisation dans les fonctions desc et label
+25be27862840e321fce2e5b10f600fc16bfc3f82 6028793f404a6f0ad3e6ebd0c9b25837a93fcfbf l.watelet <l.watelet@courriel.province.luxembourg.be> 1585584435 +0200	commit: get html constraints et equipement
