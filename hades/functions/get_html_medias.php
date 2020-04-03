@@ -1,21 +1,19 @@
 <?php
 
-function get_html_medias()
+function get_html_medias($id = 0)
 {
     global $post;
-    $medias = $post->medias;
-    $media_html="";
-    if (!empty($medias)) {
-        $medias = json_decode($medias, true);
-        if (count($medias) > 0) {
-            foreach ($medias as $value) {
-                //var_dump($value);
-                $media_html.="<div class=\"photo-evenement\" style=\"background-image:url('".$value["url"]."');\"></div>";
-                if (++$i>=6) {
-                    break ;
-                }
-            }
-        }
+    $medias_tab=false;
+    if ($id!=0) {
+        $clef=$id."_medias";
+        $medias = $post->$clef;
+    } else {
+        $medias = $post->medias;
     }
-    return $media_html;
+    
+    if (!empty($medias)) {
+        $medias_tab = json_decode($medias, true);
+    }
+
+    return $medias_tab;
 }

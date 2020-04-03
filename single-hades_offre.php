@@ -108,7 +108,14 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
                         <?php if ($medias=get_html_medias()) { ?>
                         <div class="liste-photo-evenement">
                             <!-- Création de la boucle qui récupére les photos -->
-                            <?php echo $medias; ?>
+                            <?php
+                            foreach ($medias as $value) { ?>
+                            <div class="photo-evenement" style="background-image:url(<?php echo $value["url"];?>);"></div>;
+                                <?php
+                                if (++$i>=6) {
+                                    break ;
+                                }
+                            } ?>
                             <!-- Fin de la boucle-->
                         </div>
                         <!-- FIN IF-->
@@ -147,10 +154,8 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
 
     <!-- IF evenement existe -->
     <?php $list_agenda = get_list_related_offers("agenda");
-    print_r($list_agenda);
-
-    if ($list_agenda) {
-        ?>
+     if ($list_agenda) {
+         ?>
    <section class="separator pad-top">
         <div class="wrapper clearfix">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -169,6 +174,87 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
 
     <!-- BOUCLE sur les evenements  -->
         <?php foreach ($list_agenda as $offer_id) {
+             ?>
+    <section class="evenement-blog-details">
+        <div class="wrapper clearfix">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
+                    <header class="titre">
+                        <h1><?php echo get_html_titles($offer_id); ?></h1>
+                        <h2><?php echo get_html_dates($offer_id); ?></h2>
+                    </header>
+                </div>
+                <div
+                    class="details grid-65 suffixe-35 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
+                    <!-- IF (vérification si photo existe) -->
+            <?php
+            $medias = get_html_medias($offer_id);
+             if ($medias) { ?>
+                <div class="liste-photo-evenement">
+                 <?php
+                    $nb_images=0;
+                    foreach ($medias as $value) {
+                        ?>
+                    <div class="photo-couverture"
+                        style="background-image:url('<?php echo $value["url"]; ?>');">
+                    </div>
+                                <?php
+                                if (++$nb_images>=2) {
+                                    break ;
+                                }
+                    }
+            } ?>
+            </div>
+            <!-- FIN IF-->
+            <!-- IF (vérification si contenu existe) -->
+            <?php
+            $info = get_html_information($offer_id);
+             $desc = get_html_description($offer_id);
+             if ($info || $desc) {
+                 ?>
+            <div class="informations-evenement">
+                <h3>Descripton :</h3>
+                <?php
+                echo $desc?"<p>".$desc."</p>":"";
+                 echo $info?"<p>".$info."</p>":"";
+             } ?>
+            <!-- FIN IF-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            <?php
+         } ?>
+    <!-- FIN BOUCLE -->
+        <?php
+     } ?>
+    <!-- FIN IF-->
+
+
+    <!-- IF evenement existe -->
+    <?php $list_agenda = get_list_related_offers("place");
+    if ($list_agenda) {
+        ?>
+   <section class="separator pad-top">
+        <div class="wrapper clearfix">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <div class="separateur"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="titre pad-top">
+        <div class="wrapper clearfix">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <h1>Lieu de l'événement</h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOUCLE sur les evenements  -->
+        <?php foreach ($list_agenda as $offer_id) {
             ?>
     <section class="evenement-blog-details">
         <div class="wrapper clearfix">
@@ -181,27 +267,39 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
                 </div>
                 <div
                     class="details grid-65 suffixe-35 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
-
                     <!-- IF (vérification si photo existe) -->
+            <?php
+            $medias = get_html_medias($offer_id);
+            if ($medias) { ?>
+                <div class="liste-photo-evenement">
+                 <?php
+                    $nb_images=0;
+                    foreach ($medias as $value) {
+                        ?>
                     <div class="photo-couverture"
-                        style="background-image:url('<?php echo get_template_directory_uri(); ?>/img/image-event.jpg');">
+                        style="background-image:url('<?php echo $value["url"]; ?>');">
                     </div>
-                    <!-- FIN IF-->
-
-                    <div class="informations-evenement">
-                        <h3>Descripton :</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mollis commodo diam, sit
-                            amet iaculis ligula sollicitudin eget. Donec sed magna a diam fringilla consectetur. Nullam
-                            vulputate sagittis tincidunt. Nulla posuere ultrices est nec luctus. Duis pulvinar mauris eu
-                            dui pulvinar elementum. In tellus lectus, dapibus ut vehicula non, venenatis in diam. Nullam
-                            vulputate sagittis tincidunt. Nulla posuere ultrices est nec luctus. Duis pulvinar mauris eu
-                            dui
-                            pulvinar elementum. In tellus lectus, dapibus ut vehicula non, venenatis in diam.</p>
-
-                        <!-- IF (vérification si contenu existe) -->
-                        <h3>HORAIRES :</h3>
-                        <p>le 27 juillet à 19h30.</p>
-                        <!-- FIN IF-->
+                                <?php
+                                if (++$nb_images>=2) {
+                                    break ;
+                                }
+                    }
+            } ?>
+            </div>
+            <!-- FIN IF-->
+            <!-- IF (vérification si contenu existe) -->
+            <?php
+            $info = get_html_information($offer_id);
+            $desc = get_html_description($offer_id);
+            if ($info || $desc) {
+                ?>
+            <div class="informations-evenement">
+                <h3>Descripton :</h3>
+                <?php
+                echo $desc?"<p>".$desc."</p>":"";
+                echo $info?"<p>".$info."</p>":"";
+            } ?>
+            <!-- FIN IF-->
 
                     </div>
                 </div>
@@ -214,6 +312,7 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
         <?php
     } ?>
     <!-- FIN IF-->
+
 
 
     <!-- IF activité existe -->

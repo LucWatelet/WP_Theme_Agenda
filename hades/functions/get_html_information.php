@@ -1,8 +1,14 @@
 <?php
-function get_html_information()
+function get_html_information($id = 0)
 {
     global $post;
-    $lot_information = $post->lot_information;
+    $result=false;
+    if ($id!=0) {
+        $clef=$id."_lot_information";
+        $lot_information = $post->$clef;
+    } else {
+        $lot_information = $post->lot_information;
+    }
     $index="";
     $sc=array();
 

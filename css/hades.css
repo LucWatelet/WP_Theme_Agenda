@@ -1,5 +1,9 @@
+/* ==========================================================================
+   Hades styles
+   ========================================================================== */
 ul.hades_picto li img {
-	height: 32px;
+	height: 64px;
+	width: auto;
 }
 
 ul.hades_picto {
@@ -10,3 +14,27 @@ ul.hades_picto li {
 	display: inline;
 	padding: 0 6px;
 }
+
+div.photo-couverture {
+	width: 45%;
+	margin: 0 20px 20px 0;
+	border-radius: 10px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 250px;
+	margin-bottom: 20px;
+}
+
+section.evenement-blog-details div.liste-photo-evenement {
+	body main section.evenement-blog-details .details .informations-evenement .liste-photo-evenement {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	}

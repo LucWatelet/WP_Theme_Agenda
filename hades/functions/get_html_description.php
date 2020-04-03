@@ -1,6 +1,6 @@
 <?php
 
-function get_html_description($id=0)
+function get_html_description($id = 0)
 {
     global $post;
     if ($id!=0) {
