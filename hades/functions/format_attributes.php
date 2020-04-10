@@ -18,9 +18,14 @@ function format_attributes($attributes)
         } elseif (isset($attr['picture'])) {
             $attr_picto[$index]='<li ><img src="'.get_picto($attr).'" title="'.$attr['labels']['fr'].'"  alt="'.$attr['labels']['fr'].'" /></li>';
         } else {
-            $attr_txt[$index]="<li>".$attr['labels']['fr']."</li>";
+            if (is_string($attr['value']) or is_numeric($attr['value'])) {
+                $attr_txt[$index]="<li>".$attr['labels']['fr'].":".$attr['value']."</li>";
+            } else {
+                $attr_txt[$index]="<li>".$attr['labels']['fr']."</li>";
+            }
         }
     }
+
     ksort($attr_txt);
     $str_attr_txt="<ul>".join($attr_txt, " ").join($attr_autre, " ")."</ul>";
     ksort($attr_picto);

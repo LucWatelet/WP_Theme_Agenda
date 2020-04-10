@@ -105,7 +105,10 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
 
 
                         <!-- IF (vérification si photos existent) -->
-                        <?php if ($medias=get_html_medias()) { ?>
+                        <?php $medias=get_html_medias();
+                        // on répète pas la première photo
+                        $p=array_shift($medias);
+                        if (count($medias)>0) { ?>
                         <div class="liste-photo-evenement">
                             <!-- Création de la boucle qui récupére les photos -->
                             <?php
@@ -154,8 +157,8 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
 
     <!-- IF evenement existe -->
     <?php $list_agenda = get_list_related_offers("agenda");
-     if ($list_agenda) {
-         ?>
+    if ($list_agenda) {
+        ?>
    <section class="separator pad-top">
         <div class="wrapper clearfix">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -174,68 +177,17 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
 
     <!-- BOUCLE sur les evenements  -->
         <?php foreach ($list_agenda as $offer_id) {
-             ?>
-    <section class="evenement-blog-details">
-        <div class="wrapper clearfix">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
-                    <header class="titre">
-                        <h1><?php echo get_html_titles($offer_id); ?></h1>
-                        <h2><?php echo get_html_dates($offer_id); ?></h2>
-                    </header>
-                </div>
-                <div
-                    class="details grid-65 suffixe-35 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
-                    <!-- IF (vérification si photo existe) -->
-            <?php
-            $medias = get_html_medias($offer_id);
-             if ($medias) { ?>
-                <div class="liste-photo-evenement">
-                 <?php
-                    $nb_images=0;
-                    foreach ($medias as $value) {
-                        ?>
-                    <div class="photo-couverture"
-                        style="background-image:url('<?php echo $value["url"]; ?>');">
-                    </div>
-                                <?php
-                                if (++$nb_images>=2) {
-                                    break ;
-                                }
-                    }
-            } ?>
-            </div>
-            <!-- FIN IF-->
-            <!-- IF (vérification si contenu existe) -->
-            <?php
-            $info = get_html_information($offer_id);
-             $desc = get_html_description($offer_id);
-             if ($info || $desc) {
-                 ?>
-            <div class="informations-evenement">
-                <h3>Descripton :</h3>
-                <?php
-                echo $desc?"<p>".$desc."</p>":"";
-                 echo $info?"<p>".$info."</p>":"";
-             } ?>
-            <!-- FIN IF-->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-            <?php
-         } ?>
+            include "hades/include/inc_event_blog_details.php";
+        } ?>
     <!-- FIN BOUCLE -->
         <?php
-     } ?>
+    } ?>
     <!-- FIN IF-->
 
 
-    <!-- IF evenement existe -->
-    <?php $list_agenda = get_list_related_offers("place");
-    if ($list_agenda) {
+    <!-- IF Lieux existe -->
+    <?php $list_lieux = get_list_related_offers("place");
+    if ($list_lieux) {
         ?>
    <section class="separator pad-top">
         <div class="wrapper clearfix">
@@ -253,60 +205,9 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
         </div>
     </section>
 
-    <!-- BOUCLE sur les evenements  -->
-        <?php foreach ($list_agenda as $offer_id) {
-            ?>
-    <section class="evenement-blog-details">
-        <div class="wrapper clearfix">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
-                    <header class="titre">
-                        <h1><?php echo get_html_titles($offer_id); ?></h1>
-                        <h2><?php echo get_html_dates($offer_id); ?></h2>
-                    </header>
-                </div>
-                <div
-                    class="details grid-65 suffixe-35 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
-                    <!-- IF (vérification si photo existe) -->
-            <?php
-            $medias = get_html_medias($offer_id);
-            if ($medias) { ?>
-                <div class="liste-photo-evenement">
-                 <?php
-                    $nb_images=0;
-                    foreach ($medias as $value) {
-                        ?>
-                    <div class="photo-couverture"
-                        style="background-image:url('<?php echo $value["url"]; ?>');">
-                    </div>
-                                <?php
-                                if (++$nb_images>=2) {
-                                    break ;
-                                }
-                    }
-            } ?>
-            </div>
-            <!-- FIN IF-->
-            <!-- IF (vérification si contenu existe) -->
-            <?php
-            $info = get_html_information($offer_id);
-            $desc = get_html_description($offer_id);
-            if ($info || $desc) {
-                ?>
-            <div class="informations-evenement">
-                <h3>Descripton :</h3>
-                <?php
-                echo $desc?"<p>".$desc."</p>":"";
-                echo $info?"<p>".$info."</p>":"";
-            } ?>
-            <!-- FIN IF-->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-            <?php
+    <!-- BOUCLE sur les lieux  -->
+        <?php foreach ($list_lieux as $offer_id) {
+            include "hades/include/inc_other_blog_details.php";
         } ?>
     <!-- FIN BOUCLE -->
         <?php
@@ -316,7 +217,9 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
 
 
     <!-- IF activité existe -->
-
+    <?php $list_activite = get_list_related_offers("act_ind");
+    if ($list_activite) {
+        ?>
     <section class="separator pad-top">
         <div class="wrapper clearfix">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -332,9 +235,47 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
             </div>
         </div>
     </section>
+        <?php print_r($list_activite); ?>
 
     <!-- BOUCLE sur les activités  -->
-    <section class="evenement-blog-details">
+        <?php foreach ($list_activite as $offer_id) {
+            include "hades/include/inc_activ_blog_details.php";
+        } ?>
+    <!-- FIN BOUCLE --> 
+        <?php
+    } ?>
+    <!-- FIN IF-->
+
+    <!-- IF activité de groupe existe -->
+    <?php $list_activite = get_list_related_offers("act_group");
+    if ($list_activite) {
+        ?>
+    <section class="separator pad-top">
+        <div class="wrapper clearfix">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <div class="separateur"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="titre pad-top">
+        <div class="wrapper clearfix">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <h1>En groupe</h1>
+            </div>
+        </div>
+    </section>
+        <?php print_r($list_activite); ?>
+
+    <!-- BOUCLE sur les activités  -->
+        <?php foreach ($list_activite as $offer_id) {
+            include "hades/include/inc_activ_blog_details.php";
+        } ?>
+    <!-- FIN BOUCLE --> 
+
+
+
+    <section class="evenement-blog-details" style="display:none;">
         <div class="wrapper clearfix">
             <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
@@ -384,11 +325,9 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
             </div>
         </div>
     </section>
-
-    <!-- FIN BOUCLE -->
-
+        <?php
+    } ?>
     <!-- FIN IF-->
-
 
 
     <?php echo get_default_image_of_a_post($post->ID); ?>

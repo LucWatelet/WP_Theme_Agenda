@@ -1,9 +1,15 @@
 <?php
 
-function get_html_equipemnt()
+function get_html_equipemnt($id = 0)
 {
     global $post;
-    $lot_equipemnt = $post->lot_equipemnt;
+    if ($id!=0) {
+        $clef=$id."_lot_equipemnt";
+        $lot_equipemnt = $post->$clef;
+    } else {
+        $lot_equipemnt = $post->lot_equipemnt;
+    }
+
     $index="";
     $sc=array();
 

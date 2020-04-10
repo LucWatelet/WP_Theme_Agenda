@@ -1,9 +1,15 @@
 <?php
 
-function get_html_constraints()
+function get_html_constraints($id = 0)
 {
     global $post;
-    $lot_constraints = $post->lot_constraints;
+    if ($id!=0) {
+        $clef=$id."_lot_constraints";
+        $lot_constraints = $post->$clef;
+    } else {
+        $lot_constraints = $post->lot_constraints;
+    }
+
     $index="";
     $sc=array();
 

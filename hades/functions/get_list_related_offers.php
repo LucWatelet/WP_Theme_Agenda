@@ -21,7 +21,20 @@ function get_list_related_offers($type = "")
             case $type == "place" && $value["relationship_type"] == "agenda" && $value["relationship_position"] == "parent":
                 $related_offers_id[]=$key;
                 break;
+            
+            case $type == "act_ind" && $value["relationship_type"] == "act_ind" && $value["relationship_position"] == "child":
+                $related_offers_id[]=$key;
+                break;
                 
+            case $type == "act_group" && $value["relationship_type"] == "act_group" && $value["relationship_position"] == "child":
+                $related_offers_id[]=$key;
+                break;
+
+            case $type == "annexe" && ($value["relationship_type"] == "annexe_e" || $value["relationship_type"] == "annexe_e"):
+                $related_offers_id[]=$key;
+                break;
+
+
             /*default:
                 array_push($related_offers_id, $key);
 
