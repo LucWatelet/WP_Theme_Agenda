@@ -106,23 +106,28 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
 
                         <!-- IF (vérification si photos existent) -->
                         <?php $medias=get_html_medias();
-                        // on répète pas la première photo
-                        $p=array_shift($medias);
-                        if (count($medias)>0) { ?>
+                        if (is_array($medias)) {
+                            // on répète pas la première photo
+                            if (count($medias)>0) {
+                                $p=array_shift($medias);
+                            }
+                            if (count($medias)>0) { ?>
                         <div class="liste-photo-evenement">
                             <!-- Création de la boucle qui récupére les photos -->
-                            <?php
-                            foreach ($medias as $value) { ?>
-                            <div class="photo-evenement" style="background-image:url(<?php echo $value["url"];?>);"></div>;
                                 <?php
-                                if (++$i>=6) {
-                                    break ;
-                                }
-                            } ?>
+                                foreach ($medias as $value) { ?>
+                            <div class="photo-evenement" style="background-image:url(<?php echo $value["url"];?>);"></div>;
+                                    <?php
+                                    if (++$i>=6) {
+                                        break ;
+                                    }
+                                } ?>
                             <!-- Fin de la boucle-->
                         </div>
                         <!-- FIN IF-->
-                        <?php } ?>
+                        <?php
+                            }
+                        }?>
                     </div>
                 </div>
 

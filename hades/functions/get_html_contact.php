@@ -8,6 +8,10 @@ function get_html_contact()
 
     $index="";
 
+    $pattern = "#\\\\#";
+    $replacement = "\\\\\\\\";
+    $lcontact=preg_replace($pattern, $replacement, $lcontact);
+
     if (!empty($lcontact)) {
         $contact = json_decode($lcontact, true);
 
