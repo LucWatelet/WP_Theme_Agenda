@@ -19,7 +19,7 @@
                         ?>
                     <div class="photo-couverture" style="background-image:url('<?php echo $value["url"]; ?>');">
                     </div>
-                    <?php
+                        <?php
                         if (++$nb_images>=2) {
                             break ;
                         }
@@ -38,7 +38,7 @@
                             <?php
                             echo $desc?"<p>".$desc."</p>":""; ?>
                         <!-- FIN IF-->
-                        <?php
+                            <?php
                         } ?>
 
                         <!-- IF (vérification si contenu existe) -->
@@ -51,23 +51,29 @@
 
                         <!-- IF (vérification si contenu existe) -->
                         <?php if ($constraints = get_html_constraints($offer_id)) { ?>
-                            <h3>ACCÈS :</h3>
+                            <h3>Accès :</h3>
                             <?php echo $constraints; ?>
                         <!-- FIN IF-->
                         <?php } ?>
 
-                        <!-- FIN IF-->
-
                         <!-- IF (vérification si contenu existe) -->
-                        <h3>HORAIRES :</h3>
-                        <p>***********</p>
+                        <?php if ($horaires=get_html_horaires($offer_id)) { ?>
+                            <h3>Horaires :</h3>
+                            <?php echo $horaires; ?>
                         <!-- FIN IF-->
-
+                        <?php } ?>
 
                         <!-- IF (vérification si contenu existe) -->
                         <?php if ($equipemnt=get_html_equipemnt($offer_id)) { ?>
                             <h3>Équipement :</h3>
                             <?php echo $equipemnt; ?>
+                        <!-- FIN IF-->
+                        <?php } ?>
+
+                        <!-- IF (vérification si contenu existe) -->
+                        <?php if ($tarif=get_html_tarif($offer_id)) { ?>
+                            <h3>Tarifs :</h3>
+                            <?php echo $tarif; ?>
                         <!-- FIN IF-->
                         <?php } ?>
                     </div>

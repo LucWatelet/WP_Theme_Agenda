@@ -6,7 +6,7 @@ function get_list_related_offers($type = "")
     $related_offers = $post->related_offers;
     $related_offers = json_decode($related_offers, true);
     $related_offers_id=array();
-    print_r($related_offers);
+    //print_r($related_offers);
 
     foreach ($related_offers as $key => $value) {
         switch (true) {
@@ -44,7 +44,7 @@ function get_list_related_offers($type = "")
 
     ksort($related_offers_id);
 
-    print_r($related_offers_id);
+    //print_r($related_offers_id);
 
     if (count($related_offers_id)>=1) {
         return $related_offers_id;

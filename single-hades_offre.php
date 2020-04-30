@@ -70,35 +70,40 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
                         <!-- FIN IF-->
                         <?php } ?>
 
-                        <h3>Descripton :</h3>
-                        <?php echo get_html_description() ; ?>
+                        <!-- IF (vérification si contenu existe) -->
+                        <?php if ($descr = get_html_description()) { ?>
+                            <h3>Descripton :</h3>
+                            <?php echo $descr; ?>
+                        <!-- FIN IF-->
+                        <?php } ?>
+
 
                         <!-- IF (vérification si contenu existe) -->
                         <?php if ($info = get_html_information()) { ?>
-                        <h3>INFORMATIONS PRATIQUES :</h3>
+                            <h3>Informations pratiques :</h3>
                             <?php echo $info; ?>
                         <!-- FIN IF-->
                         <?php } ?>
 
                         <!-- IF (vérification si contenu existe) -->
                         <?php if ($constraints = get_html_constraints()) { ?>
-                        <h3>ACCÈS :</h3>
+                            <h3>Accès :</h3>
                             <?php echo $constraints; ?>
+                        <!-- FIN IF-->
+                        <?php } ?>
+                        <!-- FIN IF-->
+
+                        <!-- IF (vérification si contenu existe) -->
+                        <?php if ($horaires=get_html_horaires($offer_id)) { ?>
+                            <h3>Horaires :</h3>
+                            <?php echo $horaires; ?>
                         <!-- FIN IF-->
                         <?php } ?>
 
 
-                        <!-- FIN IF-->
-
-                        <!-- IF (vérification si contenu existe) -->
-                        <h3>HORAIRES :</h3>
-                        <p>***********</p>
-                        <!-- FIN IF-->
-
-
                         <!-- IF (vérification si contenu existe) -->
                         <?php if ($equipemnt=get_html_equipemnt()) { ?>
-                        <h3>Équipement :</h3>
+                            <h3>Équipement :</h3>
                             <?php echo $equipemnt; ?>
                         <!-- FIN IF-->
                         <?php } ?>
@@ -125,7 +130,7 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
                             <!-- Fin de la boucle-->
                         </div>
                         <!-- FIN IF-->
-                        <?php
+                                <?php
                             }
                         }?>
                     </div>
@@ -138,18 +143,18 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
                     <div id="mapid" class="map">
                         <!-- Ajout de la map -->
                     </div>
-                    <script>
+                    <script  type="text/javascript" >
                         var mymap = L.map('mapid', {
                             zoomControl: false
-                        }).setView([ < ? php echo $coords; ? > ], 15);
+                        }).setView([ <?php echo $coords; ?> ], 15);
                         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {
                             foo: 'bar'
                         }).addTo(mymap);
-                        var marker = L.marker([ < ? php echo $coords; ? > ]).addTo(mymap);
+                        var marker = L.marker([<?php echo $coords; ?>]).addTo(mymap);
                         marker.bindPopup("<b><?php the_title();?></b>").openPopup();
                     </script>
                     <div class="informations-contact">
-                        <h3>CONTACT</h3>
+                        <h3>Contact</h3>
                         <?php echo get_html_contact() ; ?>
                     </div>
                 </div>
@@ -240,7 +245,7 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
             </div>
         </div>
     </section>
-        <?php print_r($list_activite); ?>
+        <?php //print_r($list_activite);?>
 
     <!-- BOUCLE sur les activités  -->
         <?php foreach ($list_activite as $offer_id) {
@@ -270,66 +275,13 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
             </div>
         </div>
     </section>
-        <?php print_r($list_activite); ?>
+        <?php //print_r($list_activite);?>
 
     <!-- BOUCLE sur les activités  -->
         <?php foreach ($list_activite as $offer_id) {
             include "hades/include/inc_activ_blog_details.php";
         } ?>
     <!-- FIN BOUCLE --> 
-
-
-
-    <section class="evenement-blog-details" style="display:none;">
-        <div class="wrapper clearfix">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
-                    <header class="titre">
-                        <h1>Titre de l'activité</h1>
-                        <h2>Durée de l'activité: 1h</h2>
-                    </header>
-                </div>
-                <div
-                    class="details grid-65 suffixe-35 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
-
-                    <div class="informations-evenement details">
-
-                        <!-- IF (vérification si contenu existe) -->
-                        <h3>Services :</h3>
-                        <ul>
-                            <li>Visite guidée sur rendez-vous</li>
-                            <li>Visite libre</li>
-                            <li>Audio guidage FR</li>
-                            <li>Guidage FR</li>
-                            <li>Guidage NL</li>
-                            <li>Guidage EN</li>
-                            <li>Panneaux didactiques FR</li>
-                        </ul>
-                        <!-- FIN IF-->
-
-                        <!-- IF (vérification si contenu existe) -->
-                        <h3>HORAIRES :</h3>
-                        <p>Ouvert du 15 janv. au 30 juin et les mar, mer, jeu et ven de 9h30 à 17h, du 01 juil. au 31
-                            août les lun, mar, mer, jeu, ven et sam de 9h30 à 17h et le dim de 14h à 18h, et du 01 sept.
-                            au 15 déc. les mar, mer, jeu et ven de 9h30 à 17h et le dim de 14h à 18h. Fermé du 16 déc.
-                            au 14 janv. 2020</p>
-                        <!-- FIN IF-->
-
-                        <!-- IF (vérification si contenu existe) -->
-                        <h3>Tarifs :</h3>
-                        <p>Par Personne : 15€</p>
-                        <!-- FIN IF-->
-
-                        <!-- IF (vérification si contenu existe) -->
-                        <h3>Remarque :</h3>
-                        <p>Blablabla</p>
-                        <!-- FIN IF-->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
         <?php
     } ?>
     <!-- FIN IF-->
