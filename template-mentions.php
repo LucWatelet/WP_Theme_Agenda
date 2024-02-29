@@ -4,11 +4,9 @@
 
 <main>
 	
-	<?php include 'bouton-annonce.php'; ?>
-	
 	<section class="mentions-legales pad-top-bot">
 		<div class="wrapper clearfix">
-			<div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
+			<div class="grid-100 tablet-grid-100 mobile-grid-100">
 				<h1><?php the_field('titre')?></h1>
 				<?php the_field('texte')?>
 			</div>

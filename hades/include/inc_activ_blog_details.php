@@ -34,7 +34,7 @@
                         $desc = get_html_description($offer_id);
                         if ($desc) {
                             ?>
-                            <h3>Descripton :</h3>
+                            <h3>Description :</h3>
                             <?php
                             echo $desc?"<p>".$desc."</p>":""; ?>
                         <!-- FIN IF-->

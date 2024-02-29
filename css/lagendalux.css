@@ -1,0 +1,132 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-janv.-2016, 11:21:12
+    Author     : l.watelet
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@font-face { font-family: 'Mindset'; font-weight: bold; src: url('https://www.ftlb.be/h2o/event/Mindset.ttf'); }
+
+
+/* PERSONNALISATION */
+
+body{ font-family: 'Nunito', sans-serif; border:1px solid #91d900; padding:30px; }
+
+h2{ font-family: 'Mindset'; letter-spacing: 1px; font-size:25px; margin:20px 0 10px 0; color:#91d900; }
+
+h3 {
+	font-family: 'Mindset';
+	letter-spacing: 1px;
+	font-size: 20px;
+	margin: 20px 0 10px 0;
+	color: #000000;
+	display: block;
+	clear: both;
+}
+
+div#horaire{ font-family: 'Nunito', sans-serif; font-size:18px; font-weight: 400; line-height: 2; }
+
+
+input, textarea{ 
+	color:#91d900; 
+	display: inline-block; 
+	background-color: #fafafa; 
+	letter-spacing: 1px; 
+	margin: 0 0 15px 0; 
+	border:none; 
+	border-bottom:1px dashed #91d900; 
+	font-size:18px; 
+	font-family: 'Nunito', sans-serif; box-sizing: border-box; 
+	text-transform: inherit; 
+	
+}
+
+textarea.texte {
+	width: calc(100% - 30px);
+	vertical-align: top;
+}
+
+div.airetexte {
+	width: 95%;
+}
+
+input::placeholder, textarea::placeholder{ color:#91d900; opacity: 0.5; font-family: 'Nunito', sans-serif; }
+
+input[type="button"]{ font-family: 'Nunito', sans-serif; font-size:16px;font-weight: bold; text-transform: uppercase; text-decoration: none; letter-spacing: 1px; background-color:#000000; color:#91d900; border-bottom:none; cursor: pointer; }
+#butenr{ padding:10px 15px; }
+
+
+.infouser{ 
+	color:#689b00; 
+	font-weight: 400; 
+	display: block; 
+	padding: 12px 0px; 
+	font-size:14px; 
+	clear: both;
+	}
+	
+.alerte {
+	font-weight: bold;
+	display: block;
+	font-size: 14px;
+	background-color: red;
+	color: #FFFFFF;
+	padding: 12px;
+	clear: both;
+}
+
+#localites .loc_list { font-size:18px; }
+#localites .loc_list input[type="radio"]{ margin-right: 10px; }
+
+.cat_list, .thm_list, .lieu_list { padding: 0px 15px; }
+
+input[type="radio"]{ margin-right: 10px; }
+input[type="checkbox"]{ margin-right: 10px; }
+
+
+#categorie_principale {
+}
+
+#theme_general {
+	display: none;
+}
+
+#theme_contexte {
+	display: none;
+}
+
+.thm_liste {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+}
+
+#thm_21202,#thm_21205,#thm_21222,#thm_21219, 
+#thm_21218,#thm_21211,#thm_21214,#thm_21220,
+#thm_21215,#thm_21212,#thm_21306,#thm_21206,
+#thm_21204,#thm_21228,#thm_21096,#thm_21209,
+#thm_21138,#thm_21135,#thm_21230,#thm_21229,
+#thm_21210,#thm_21213,#thm_21207,#thm_21316,
+#thm_21231,#thm_21221,#thm_21122,#thm_21203,
+#thm_21367,#thm_21216,#thm_21365,#thm_21364,
+#thm_21217,#thm_21366,#thm_21218,#thm_21368
+
+ {
+	display:none
+}
+
+#restrict {
+	width:0px;
+	height: 0px;
+	overflow: hidden;
+}
+
+#listevent ol li{ margin-bottom:10px; font-size:16px; }
+
+
+

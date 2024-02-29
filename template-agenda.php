@@ -1,22 +1,42 @@
-<?php /* Template Name: Agenda */ ?>
+<?php 
+/* Template Name: Agenda */
+global $wpdb;
+
+?>
 
 
-<?php get_header(); ?>
+<?php get_header(); 
 
+        /* -----Pierre Ernould -----
+        Mise à la corbeille des offres périmées */
+        $t = date("Y-m-d");
+        $db = $wpdb->prefix;
+        $r = $wpdb->query(
+            $wpdb->prepare(
+                "update ".$wpdb->posts."
+                inner join ".$wpdb->postmeta."
+                on ".$wpdb->posts.".ID = ".$wpdb->postmeta.".post_id
+                set ".$wpdb->posts.".post_status = %s
+                where ".$wpdb->postmeta.".meta_key = %s and
+                ".$wpdb->postmeta.".meta_value < %s",
+                'trash', 'date_fin', $t
+            )
+        );
+//        var_dump($r);
+?>
+?>
 <main>
 
-    <?php include 'bouton-annonce.php'; ?>
-
-    <section id="cherche-explore-organise" class="pad-top">
+    <section id="cherche-explore-organise" class="cherche-explore-organise">
         <div class="wrapper clearfix">
             <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <div class="tab tab-page-agenda aligncenter tablet-aligncenter mobile-aligncenter">
                         <header>
-                            <h1>Je cherche</h1><h2>un évènement</h2>
+                            <h1>Je cherche</h1><h2>Agenda du Luxembourg BELGE</h2>
                         </header>
                     </div>
-                    <div id="cherche" class="tabcontent grid-100 tablet-grid-100 mobile-grid-100 pad-top-bot">
+                    <div id="cherche" class="tabcontent grid-100 tablet-grid-100 mobile-grid-100">
                         <?php include 'hades/include/inc_search_form.php'; ?>
                     </div>
                 </div>
@@ -31,6 +51,8 @@
         $has_no_filter = true;
     }
     
+    //$GLOBALS['wp_query']->datefork = date("Ymd", time()) . date("Ymd", time() + (3600 * 24 * 365));
+
     $query = query_hades_events($GLOBALS['wp_query']->query_vars);
     
     $posts_agenda = new WP_Query($query);
@@ -43,9 +65,17 @@
 
     $posts_agenda->get_posts();
 
+	$q=$GLOBALS['wp_query']->query_vars;
+//	if($q["loc_rayon"] && !$q["commune"]) {
+//		echo "<div class='wrapper clearfix'><div class='erreur_recherche' >Aucune commune n'ayant été choisie (Où?), le résultat ne tient pas compte de la distance sélectionnée (".$q["loc_rayon"]."km)</div></div>";
+//	}
+	
     if ($posts_agenda->have_posts()) {
         ?>
-        <section class="prochains-evenements-blog pad-top">
+        <section class="prochains-evenements-blog pad-top" id="liste">
+			<?php 	if($q["loc_rayon"] && !$q["commune"]) {
+				echo "<div class='wrapper clearfix'><div class='erreur_recherche' >Aucune commune n'ayant été choisie (Où?), le résultat ne tient pas compte de la distance sélectionnée (".$q["loc_rayon"]."km)</div></div>";
+			} ?>
             <div class="wrapper clearifx">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
                     <div class="liste-evenement-blog clearfix">
@@ -72,7 +102,16 @@
             </div>
         </section>
         <?php
-    }
+    }else{ ?>
+		
+	<section class="prochains-evenements-blog pad-top" id="liste">
+        <div class="wrapper clearifx">
+			<div class="grid-100 tablet-grid-100 mobile-grid-100">
+				<h1>Pas d'évènement correspondant à vos critères de recherche.</h1>
+			</div>
+		</div>
+	</section>
+<?php	}
     ?>
 
 </main>

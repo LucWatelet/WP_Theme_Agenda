@@ -1,6 +1,3 @@
-<?php /* Template Name: Agenda */ ?>
-
-
 <?php get_header(); ?>
 
 <main>

@@ -1,7 +1,10 @@
+<?php $id = get_the_ID(); ?>
+
 <div id="formulaire-recherche">
+	<h1>Recherche spécifique</h1>
     <form id="search" action="<?php echo home_url('/agenda/'); ?>">
         <ul class="clearfix">
-            <li>
+        <li>
                 <select name="cat" id="quoi">
                     <?php
                     /* Marchés et Brocantes */
@@ -15,12 +18,12 @@
                     $link[7]["image"] = "picto-concert.svg";
                     //
                     /*Conférences, Rencontres et Salons*/
-                    $link[1]["name"] = "Conférences, rencontres et salons";
+                    $link[1]["name"] = "Conférences, rencontres, salons et visites guidées";
                     $link[1]["url"] = "72";
                     $link[1]["image"] = "picto-conference.svg";
                     //
                     /*Évènements sportifs*/
-                    $link[2]["name"] = "évènement sportifs";
+                    $link[2]["name"] = "évènements sportifs";
                     $link[2]["url"] = "70";
                     $link[2]["image"] = "picto-sportif.svg";
                     //
@@ -35,7 +38,7 @@
                     $link[4]["image"] = "picto-festival.svg";
                     //
                     /*Fêtes*/
-                    $link[5]["name"] = "Fêtes Folklore";
+                    $link[5]["name"] = "Fêtes et Folklore";
                     $link[5]["url"] = "75";
                     $link[5]["image"] = "picto-folklore.svg";
                     //
@@ -60,10 +63,14 @@
                     $link[10]["image"] = "picto-spectacles.svg";
                     //
                     /*Stages et Ateliers*/
-                    $link[11]["name"] = "Stage et Atelier";
+                    $link[11]["name"] = "Stages et Ateliers";
                     $link[11]["url"] = "83";
                     $link[11]["image"] = "picto-stage.svg";
 
+					?>
+					<option value="" >Quoi ?</option>
+					<?php
+					
                     foreach ($link as $key => $value) {
                         ?>
                         <option 
@@ -75,37 +82,7 @@
                     }
                     ?>
                 </select>
-            </li>
-            <li>
-                <?php
-                $args_loc = array(
-                    'show_option_all' => __('Localité'),
-                    'orderby' => 'name',
-                    'order' => 'ASC',
-                    'show_count' => 0,
-                    'hide_empty' => 1,
-                    'echo' => 0,
-                    'name' => 'localite',
-                    'id' => 'localite',
-                    'hierarchical' => FALSE,
-                    'depth' => 1,
-                    'taxonomy' => HADES_TAXO_LOC,
-                    'hide_if_empty' => true,
-                    'value_field' => 'slug',
-                );
-                // Y-a-t'il une ville actuellement sélectionnée ?
-                if (get_query_var('localite') && ( $t = term_exists(get_query_var('localite'), HADES_TAXO_LOC) )) {
-                    $args_loc['selected'] = get_query_var('localite');
-                }
-                
-                $listloc = wp_dropdown_categories($args_loc);
-                
-                // Afficher la liste s'il existe des villes associées à des contenus
-                if ($listloc) {
-                    echo $listloc;
-                }
-                ?>
-            </li>
+            </li> 
             <li>
                 <select name="datefork" id="datefork">
                     <option 
@@ -113,7 +90,7 @@
                         value="<?php echo $d1; ?>" 
                         <?php echo $d1 == get_query_var('datefork') ? "selected='selected'" : ""; ?>
                         >
-                        Pas de préférence
+                        Quand ?
                     </option>
                     <option 
                     <?php $d2 = date("Ymd", time()); ?>
@@ -158,19 +135,43 @@
                     </option>
                 </select>
             </li>
+			<li>
+                <?php
+                $args_com = array(
+                    'show_option_all' => __('Où ?'),
+                    'orderby' => 'name',
+                    'order' => 'ASC',
+                    'show_count' => 0,
+                    'hide_empty' => 1,
+                    'echo' => 0,
+                    'name' => 'commune',
+                    'id' => 'commune',
+                    'hierarchical' => FALSE,
+                    'depth' => 1,
+                    'taxonomy' => HADES_TAXO_COM,
+                    'hide_if_empty' => true,
+                    'value_field' => 'slug',
+                );
+                // Y-a-t'il une ville actuellement sélectionnée ?
+                if (get_query_var('commune') && ( $t = term_exists(get_query_var('commune'), HADES_TAXO_COM) )) {
+                    $args_com['selected'] = get_query_var('commune');
+                }
+                
+                $listcom = wp_dropdown_categories($args_com);
+                
+                // Afficher la liste s'il existe des villes associées à des contenus
+                if ($listcom) {
+                    echo $listcom;
+                }
+                ?>
+            </li>
             <li>
                 <select name="loc_rayon" id="loc_rayon">
                 <option 
                         value=""
                         <?php echo null == get_query_var('loc_rayon') ? "selected='selected'" : ""; ?>
                         >
-                        Loin ?
-                    </option>                
-                    <option 
-                        value="5"
-                        <?php echo 5 == get_query_var('loc_rayon') ? "selected='selected'" : ""; ?>
-                        >
-                        5 Km
+                        Distance ?
                     </option>
                     <option 
                         value="10"
@@ -204,20 +205,28 @@
                 </select>
             </li>
             <li>
-                <button id="search-btn" type="submit" value="Rechercher"></button>
+			<button id="search-btn" type="submit" value="Rechercher"></button>
             </li>
         </ul>
     </form>
 </div>
 
+
+
+
 <div id="liste-theme">
+	<h1>Ou par type d'évènement:
+		<?php if($id == 52585): ?>
+			<button onclick="location.href='<?php echo get_permalink(52585); ?>'" type="button" id="reset-btn" value="Reset">Réinitialiser</button>
+		<?php endif; ?>
+	</h1>
     <ul class="clearfix">
 
         <?php
         foreach ($link as $key => $value) {
             ?>
 
-            <li class="grid-33 tablet-grid-100 mobile-grid-100">
+            <li class="grid-33 tablet-grid-50 mobile-grid-100">
                 <a href="<?php echo get_site_url(); ?>/agenda/?cat=<?php echo($value["url"]); ?>">
                     <img class="picto" src="<?php echo get_template_directory_uri(); ?>/img/<?php echo($value["image"]); ?>" alt="picto">
                     <h3><?php echo($value["name"]); ?></h3>

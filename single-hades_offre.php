@@ -38,29 +38,23 @@ if (has_post_thumbnail()) {
 
 $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, 'gps_x', true);
 
-
-
 ?>
 
 <main>
-    <?php include 'bouton-annonce.php'; ?>
+	
     <section class="evenement-blog-details pad-top">
         <div class="wrapper clearfix">
             <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
                     <div class="lien-prec">
-                        <a href="<?php echo get_permalink(52585); ?>" class="retour"><img
-                                src="<?php echo get_template_directory_uri(); ?>/img/fleche-retour.svg"> Retour à la
-                            page Agenda</a>
+                        <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="retour"><img src="<?php echo get_template_directory_uri(); ?>/img/fleche-retour.svg"> Retour à la page précédente</a>
                     </div>
-                    <header class="titre">
-                        <h1><?php the_title(); ?></h1>
-                        <h2><?php echo $dates; ?></h2>
+                    <header>
+						<h1><?php the_title(); ?></h1>
+						<h2><?php echo $dates; ?></h2>
                     </header>
                 </div>
-                <div
-                    class="details grid-65 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
-                    <!--<div class="photo-couverture" style="background-image:url('<?php echo $thumbnail; ?>');"></div>-->
+                <div class="details grid-65 tablet-grid-100 mobile-grid-100 alignleft tablet-alignleft mobile-alignleft">
                     <img class="photo-event" src="<?php echo $thumbnail; ?>" alt="<?php the_title(); ?>">
                     <div class="informations-evenement">
 
@@ -72,7 +66,7 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
 
                         <!-- IF (vérification si contenu existe) -->
                         <?php if ($descr = get_html_description()) { ?>
-                            <h3>Descripton :</h3>
+                            <h3>Description :</h3>
                             <?php echo $descr; ?>
                         <!-- FIN IF-->
                         <?php } ?>
@@ -107,7 +101,7 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
                             <?php echo $equipemnt; ?>
                         <!-- FIN IF-->
                         <?php } ?>
-
+						
 
                         <!-- IF (vérification si photos existent) -->
                         <?php $medias=get_html_medias();
@@ -135,10 +129,6 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
                         }?>
                     </div>
                 </div>
-
-
-
-
                 <div class="maps grid-35 tablet-grid-100 mobile-grid-100">
                     <div id="mapid" class="map">
                         <!-- Ajout de la map -->
@@ -154,13 +144,37 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
                         marker.bindPopup("<b><?php the_title();?></b>").openPopup();
                     </script>
                     <div class="informations-contact">
-                        <h3>Contact</h3>
+                        <h3>Adresse et contact</h3>
                         <?php echo get_html_contact() ; ?>
                     </div>
+					<div class="fav">
+						
+						<?php if ( is_user_logged_in() ) { ?>
+							
+						<?php echo do_shortcode('[favorite_button]'); ?>
+						
+						<?php
+							 }
+						?>
+						
+						<?php
+						
+						if($dd && $df){
+						?>
+						<div title="Add to Calendar" class="addeventatc">
+							Ajouter au calendrier
+							<span class="start"><?php echo $dd; ?></span>
+							<span class="end"><?php echo $df; ?></span>
+							<span class="timezone"></span>
+							<span class="title"><?php the_title(); ?></span>
+							<span class="description"><?php echo $descr; ?></span>
+						</div>
+						<?php } ?>
+						<h3>Partagez:</h3>
+						<?php echo do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]'); ?>
+					</div>
                 </div>
             </div>
-        </div>
-        </div>
         </div>
     </section>
 
@@ -193,37 +207,28 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
         <?php
     } ?>
     <!-- FIN IF-->
-
-
-    <!-- IF Lieux existe -->
-    <?php $list_lieux = get_list_related_offers("place");
-    if ($list_lieux) {
-        ?>
-   <section class="separator pad-top">
-        <div class="wrapper clearfix">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <div class="separateur"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="titre pad-top">
-        <div class="wrapper clearfix">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <h1>Lieu de l'événement</h1>
-            </div>
-        </div>
-    </section>
-
-    <!-- BOUCLE sur les lieux  -->
-        <?php foreach ($list_lieux as $offer_id) {
-            include "hades/include/inc_other_blog_details.php";
-        } ?>
-    <!-- FIN BOUCLE -->
-        <?php
-    } ?>
-    <!-- FIN IF-->
-
+	
+	
+	
+	<?php $list_lieux = get_list_related_offers("place");
+		if ($list_lieux) {
+			?>
+	
+		 <section class="titre">
+			<div class="wrapper clearfix">
+				<div class="grid-100 tablet-grid-100 mobile-grid-100">
+					<h3>Lieu de l'événement: </h3>
+				</div>
+			</div>
+		</section>
+	
+			<?php foreach ($list_lieux as $offer_id) {
+				include "hades/include/inc_other_blog_details.php";
+			} ?>
+			<?php
+		} ?>
+	
+	
 
 
     <!-- IF activité existe -->
@@ -287,7 +292,12 @@ $coords = get_post_meta($post->ID, 'gps_y', true).",".get_post_meta($post->ID, '
     <!-- FIN IF-->
 
 
-    <?php echo get_default_image_of_a_post($post->ID); ?>
+    <?php 
+//	echo get_default_image_of_a_post($post->ID);
+	?>
+	
+
+	
 </main>
 
 <?php get_footer(); ?>

@@ -26,7 +26,7 @@ div.photo-couverture {
 	margin-bottom: 20px;
 }
 
-section.evenement-blog-details div.liste-photo-evenement {
+section.evenement-blog-details div.liste-photo-evenement,
 	body main section.evenement-blog-details .details .informations-evenement .liste-photo-evenement {
 		display: -webkit-box;
 		display: -ms-flexbox;
@@ -37,4 +37,32 @@ section.evenement-blog-details div.liste-photo-evenement {
 		flex-direction: row;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-	}
+}
+
+div.erreur_recherche {
+	max-width: 929px;
+	margin: auto;
+	text-align: center;
+	background-color: red;
+	color: white;
+	padding: 15px;
+	font-weight: 900;
+	letter-spacing: 1px;
+}
+
+/* ajout l.watelet mise epage blog*/
+.alignright {
+    float: right;
+    margin: 0.5em 0 0.5em 1em;
+}
+
+.alignleft {
+    float: left;
+    margin: 0.5em 1em 0.5em 0;
+}
+
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

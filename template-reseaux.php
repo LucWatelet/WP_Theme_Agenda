@@ -1,26 +1,38 @@
-<?php /* Template Name: Reseaux Culture */ ?>
+<?php /* Template Name: Cartes et repertoires */ ?>
 
 <?php get_header(); ?>
 
-<main class="pad-bot">
+<main>
 
-	<?php include 'bouton-annonce.php'; ?>
-	
-	<section id="cherche-explore-organise" class="culture-sport pad-top-bot">
-		<div class="wrapper clearfix">
-			<div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
-				<div class="grid-100 tablet-grid-100 mobile-grid-100">
-					<div class="tab">
-						<button class="tablinks active" onclick="openChoice(event, 'culture')"><h1>Culture</h1></button>
-						<button class="tablinks"><a href="<?php echo get_permalink(52776); ?>"><h1>Sport</h1></a></button>
-					</div>
-					<div id="culture" class="tabcontent grid-100 tablet-grid-100 mobile-grid-100 pad-top">
-						<?php echo do_shortcode('[hades_map_search categories="academies,artisans-dart,bibliotheques,centres-culturels,centres-dexpression-et-creativite,centres-maisons-de-jeunes,cercles-dhistoire,chorales,cine-clubs,cinemas-et-theatres,galeries-et-centres-dexpositions,groupes-de-musique-amplifiees,harmonies-et-fanfares,ludotheques,mediatheques,musees,organisateurs-de-festivals,sites-archeologiques,troupes-de-theatre,troupes-de-dances"]'); ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<section id="cherche-explore-organise" class="cherche-explore-organise">
+        <div class="wrapper clearfix">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                   <div class="tab tab-page-agenda aligncenter tablet-aligncenter mobile-aligncenter">
+                        <header>
+                            <h1>J'explore</h1><h2>Cartes et Répertoires</h2>
+                        </header>
+                    </div>
+                    <div class="tabcontent explore grid-100 tablet-grid-100 mobile-grid-100 pad-bloc">
+                        <div id="lien-explore" class="clearfix">
+                            <article class="grid-50 tablet-grid-50 mobile-grid-100">
+                                <img class="picto" src="<?php echo get_template_directory_uri(); ?>/img/picto-spectacles-2.svg" alt="picto culture">
+                                <h1>Culture</h1>
+                                <div class="border"></div>
+                                <a href="<?php echo get_permalink(62119); ?>" class="voir-plus transparant">Voir plus</a>
+                            </article>
+                            <article class="grid-50 tablet-grid-50 mobile-grid-100">
+                                <img class="picto" src="<?php echo get_template_directory_uri(); ?>/img/picto-promenade.svg" alt="picto sportif">
+                                <h1>Sport</h1>
+                                <div class="border"></div>
+                                <a href="<?php echo get_permalink(62121); ?>" class="voir-plus transparant">Voir plus</a>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </main>
 

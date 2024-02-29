@@ -4,12 +4,10 @@
 
 <main>
 	
-	<?php include 'bouton-annonce.php'; ?>
-	
-	<section class="nous-contacter pad-top">
+	<section class="nous-contacter pad-top-bot">
 		<div class="wrapper clearfix">
 			<div class="grid-80 suffixe-10 prefix-10 tablet-grid-100 mobile-grid-100 grid-parent">
-				<header class="titre aligncenter tablet-aligncenter mobile-aligncenter">
+				<header class="aligncenter tablet-aligncenter mobile-aligncenter">
 					<h1>Nous contacter</h1>
 					<h2>Besoin de nous ?</h2>
 				</header>

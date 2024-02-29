@@ -35,7 +35,7 @@
                 if ($info || $desc) {
                     ?>
                 <div class="informations-evenement">
-                    <h3>Descripton :</h3>
+                    <h3>Description :</h3>
                     <?php
                     echo $desc?"<p>".$desc."</p>":"";
                     echo $info?"<p>".$info."</p>":"";
